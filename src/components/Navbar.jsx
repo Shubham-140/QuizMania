@@ -42,6 +42,7 @@ const Navbar = () => {
   };
 
   const colors = lightMode ? theme.light : theme.dark;
+  const isQuizActive = window.location.pathname.startsWith("/quiz");
 
   return (
     <nav
@@ -61,7 +62,7 @@ const Navbar = () => {
         position: "relative",
       }}
     >
-      {/* Left - Logo (unchanged) */}
+      {/* Left - Logo */}
       <Link
         to="/"
         style={{
@@ -73,10 +74,9 @@ const Navbar = () => {
           zIndex: 1001,
         }}
         onClick={(e) => {
-          if (window.location.pathname.startsWith("/quiz")) {
+          if (isQuizActive) {
             e.preventDefault();
             setShowExitOverlay(true);
-            return;
           }
         }}
       >
@@ -128,31 +128,47 @@ const Navbar = () => {
           }}
         >
           {["Home", "About", "Rules", "Feedback"].map((item) => (
-            <Link
-              key={item}
-              to={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
-              style={{
-                padding: "6px 0",
-                position: "relative",
-                cursor: "pointer",
-                textDecoration: "none",
-              }}
-            >
+            isQuizActive ? (
               <span
+                key={item}
                 style={{
+                  padding: "6px 0",
                   color: colors.text,
                   fontWeight: "600",
-                  fontSize: "clamp(14px, 1.8vw, 18px)", // Larger font size
+                  fontSize: "clamp(14px, 1.8vw, 18px)",
+                  opacity: 0.5,
+                  cursor: "not-allowed",
                 }}
               >
                 {item}
               </span>
-            </Link>
+            ) : (
+              <Link
+                key={item}
+                to={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+                style={{
+                  padding: "6px 0",
+                  position: "relative",
+                  cursor: "pointer",
+                  textDecoration: "none",
+                }}
+              >
+                <span
+                  style={{
+                    color: colors.text,
+                    fontWeight: "600",
+                    fontSize: "clamp(14px, 1.8vw, 18px)",
+                  }}
+                >
+                  {item}
+                </span>
+              </Link>
+            )
           ))}
         </div>
       )}
 
-      {/* Right - Theme Toggle (unchanged) */}
+      {/* Right - Theme Toggle */}
       <div
         style={{
           display: "flex",
@@ -265,29 +281,44 @@ const Navbar = () => {
           }}
         >
           {["Home", "About", "Rules", "Feedback"].map((item) => (
-            <Link
-              key={item}
-              to={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
-              style={{
-                textDecoration: "none",
-              }}
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            isQuizActive ? (
               <span
+                key={item}
                 style={{
                   color: colors.text,
                   fontWeight: "600",
                   fontSize: "20px",
+                  opacity: 0.5,
+                  cursor: "not-allowed",
                 }}
               >
                 {item}
               </span>
-            </Link>
+            ) : (
+              <Link
+                key={item}
+                to={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+                style={{
+                  textDecoration: "none",
+                }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span
+                  style={{
+                    color: colors.text,
+                    fontWeight: "600",
+                    fontSize: "20px",
+                  }}
+                >
+                  {item}
+                </span>
+              </Link>
+            )
           ))}
         </div>
       )}
 
-      {/* Exit Confirmation Overlay (unchanged) */}
+      {/* Exit Confirmation Overlay */}
       {showExitOverlay && (
         <ExitConfirmationOverlay setShowExitOverlay={setShowExitOverlay} />
       )}
