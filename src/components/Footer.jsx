@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const lightMode = useSelector((state) => state.color.lightMode);
+  const isQuizActive = window.location.pathname.startsWith("/quiz");
 
   // Theme colors matching your existing design
   const theme = {
@@ -54,7 +55,7 @@ const Footer = () => {
           gap: "clamp(20px, 4vw, 40px)",
         }}
       >
-        {/* Logo Section - Updated to match HomePage */}
+        {/* Logo Section */}
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div
@@ -63,7 +64,7 @@ const Footer = () => {
                 height: "40px",
                 backgroundColor: colors.primary,
                 color: "white",
-                borderRadius: "8px", // Square with slight rounding
+                borderRadius: "8px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -74,7 +75,7 @@ const Footer = () => {
                     ? "rgba(16, 185, 129, 0.3)"
                     : "rgba(16, 185, 129, 0.2)"
                 }`,
-                transform: "rotate(-5deg)", // Tilt effect
+                transform: "rotate(-5deg)",
                 transition: "transform 0.3s ease",
                 ":hover": {
                   transform: "rotate(0deg) scale(1.05)",
@@ -131,19 +132,31 @@ const Footer = () => {
           >
             {navItems.map((item) => (
               <li key={item.name}>
-                <Link
-                  to={item.path}
-                  style={{
-                    color: colors.text,
-                    textDecoration: "none",
-                    transition: "color 0.2s ease",
-                    ":hover": {
-                      color: colors.primary,
-                    },
-                  }}
-                >
-                  {item.name}
-                </Link>
+                {isQuizActive ? (
+                  <span
+                    style={{
+                      color: colors.text,
+                      opacity: 0.5,
+                      cursor: "not-allowed",
+                    }}
+                  >
+                    {item.name}
+                  </span>
+                ) : (
+                  <Link
+                    to={item.path}
+                    style={{
+                      color: colors.text,
+                      textDecoration: "none",
+                      transition: "color 0.2s ease",
+                      ":hover": {
+                        color: colors.primary,
+                      },
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -179,6 +192,7 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Developer Hub */}
         <div>
           <h3
             style={{
@@ -198,44 +212,84 @@ const Footer = () => {
             }}
           >
             {/* GitHub Link */}
-            <Link
-              to="https://github.com/Shubham-140"
-              style={{
-                backgroundColor: colors.secondary,
-                borderRadius: "8px",
-                padding: "8px 12px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                textDecoration: "none",
-              }}
-              target="_blank"
-            >
-              <span style={{ color: colors.primary }}>💻</span>
-              <span style={{ color: colors.text, fontSize: "14px" }}>
-                GitHub
-              </span>
-            </Link>
+            {isQuizActive ? (
+              <div
+                style={{
+                  backgroundColor: colors.secondary,
+                  borderRadius: "8px",
+                  padding: "8px 12px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  opacity: 0.5,
+                  cursor: "not-allowed",
+                }}
+              >
+                <span style={{ color: colors.primary }}>💻</span>
+                <span style={{ color: colors.text, fontSize: "14px" }}>
+                  GitHub
+                </span>
+              </div>
+            ) : (
+              <Link
+                to="https://github.com/Shubham-140"
+                style={{
+                  backgroundColor: colors.secondary,
+                  borderRadius: "8px",
+                  padding: "8px 12px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  textDecoration: "none",
+                }}
+                target="_blank"
+              >
+                <span style={{ color: colors.primary }}>💻</span>
+                <span style={{ color: colors.text, fontSize: "14px" }}>
+                  GitHub
+                </span>
+              </Link>
+            )}
 
             {/* LeetCode Link */}
-            <Link
-              to="https://leetcode.com/u/Shubham-140/"
-              style={{
-                backgroundColor: colors.secondary,
-                borderRadius: "8px",
-                padding: "8px 12px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                textDecoration: "none",
-              }}
-              target="_blank"
-            >
-              <span style={{ color: colors.primary }}>🧠</span>
-              <span style={{ color: colors.text, fontSize: "14px" }}>
-                LeetCode
-              </span>
-            </Link>
+            {isQuizActive ? (
+              <div
+                style={{
+                  backgroundColor: colors.secondary,
+                  borderRadius: "8px",
+                  padding: "8px 12px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  opacity: 0.5,
+                  cursor: "not-allowed",
+                }}
+              >
+                <span style={{ color: colors.primary }}>🧠</span>
+                <span style={{ color: colors.text, fontSize: "14px" }}>
+                  LeetCode
+                </span>
+              </div>
+            ) : (
+              <Link
+                to="https://leetcode.com/u/Shubham-140/"
+                style={{
+                  backgroundColor: colors.secondary,
+                  borderRadius: "8px",
+                  padding: "8px 12px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  textDecoration: "none",
+                }}
+                target="_blank"
+              >
+                <span style={{ color: colors.primary }}>🧠</span>
+                <span style={{ color: colors.text, fontSize: "14px" }}>
+                  LeetCode
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </div>
