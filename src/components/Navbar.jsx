@@ -59,7 +59,8 @@ const Navbar = () => {
         zIndex: 1000,
         borderBottom: `1px solid ${colors.border}`,
         fontFamily: "'Inter', -apple-system, sans-serif",
-        position: "relative",
+        position: "sticky", // Changed from 'relative' to 'sticky'
+        top: 0, // Added to make sticky positioning work
       }}
     >
       {/* Left - Logo */}
@@ -127,7 +128,7 @@ const Navbar = () => {
             transform: "translateX(-50%)",
           }}
         >
-          {["Home", "About", "Rules", "Feedback"].map((item) => (
+          {["Home", "About", "Rules", "Feedback"].map((item) =>
             isQuizActive ? (
               <span
                 key={item}
@@ -145,7 +146,9 @@ const Navbar = () => {
             ) : (
               <Link
                 key={item}
-                to={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+                to={`/${
+                  item.toLowerCase() === "home" ? "" : item.toLowerCase()
+                }`}
                 style={{
                   padding: "6px 0",
                   position: "relative",
@@ -164,7 +167,7 @@ const Navbar = () => {
                 </span>
               </Link>
             )
-          ))}
+          )}
         </div>
       )}
 
@@ -280,7 +283,7 @@ const Navbar = () => {
             transition: "opacity 0.3s ease",
           }}
         >
-          {["Home", "About", "Rules", "Feedback"].map((item) => (
+          {["Home", "About", "Rules", "Feedback"].map((item) =>
             isQuizActive ? (
               <span
                 key={item}
@@ -297,7 +300,9 @@ const Navbar = () => {
             ) : (
               <Link
                 key={item}
-                to={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+                to={`/${
+                  item.toLowerCase() === "home" ? "" : item.toLowerCase()
+                }`}
                 style={{
                   textDecoration: "none",
                 }}
@@ -314,7 +319,7 @@ const Navbar = () => {
                 </span>
               </Link>
             )
-          ))}
+          )}
         </div>
       )}
 
