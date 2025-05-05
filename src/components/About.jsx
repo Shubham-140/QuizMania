@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const lightMode = useSelector((state) => state.color.lightMode);
+  const navigate = useNavigate();
 
   // Theme colors matching your homepage
   const theme = {
@@ -303,6 +305,7 @@ const About = () => {
                 }`,
               },
             }}
+            onClick={() => navigate("/")}
           >
             Start Quizzing Now
           </button>
