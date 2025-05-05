@@ -11,6 +11,7 @@ import { Settings } from "./components/Settings.jsx";
 import { Score } from "./components/Score.jsx";
 import About from "./components/About.jsx";
 import Feedback from "./components/Feedback.jsx";
+import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +45,12 @@ const router = createBrowserRouter([
       {
         path:"/feedback",
         element:<Feedback/>
+      },
+      {
+        path: "*",
+        element: <Navigate to="/" replace /> // Note: "Navigate" not "navigate"
       }
-    ],
+    ]
   },
 ]);
 
